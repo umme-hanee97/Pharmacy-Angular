@@ -1,6 +1,103 @@
-<form class="login">
-    <input type="text" placeholder="Username" name="username" [(ngModel)]="form.username">
-    <input type="email" placeholder="Email" name="email" [(ngModel)]="form.email">
-    <input type="password" placeholder="Password" name="password" [(ngModel)]="form.password">
-    <button type="button" (click)="onSubmit()">Sign Up</button>
-  </form>
+<div class="signup-container">
+  <div class="signup-card">
+    <h2>Create Account</h2>
+
+    <!-- Success Alert -->
+    <div *ngIf="isSuccessful" class="alert alert-success">
+      Account created successfully! Redirecting to login...
+    </div>
+
+    <!-- Error Alert -->
+    <div *ngIf="isSignUpFailed" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Password Mismatch Alert -->
+    <div *ngIf="passwordMismatch" class="alert alert-danger">
+      Passwords do not match!
+    </div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          formControlName="name"
+          placeholder="Enter your full name"
+          [class.is-invalid]="name?.invalid && name?.touched"
+        />
+        <div *ngIf="name?.invalid && name?.touched" class="invalid-feedback">
+          <span *ngIf="name?.errors?.['required']">Name is required</span>
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Enter your email"
+          [class.is-invalid]="email?.invalid && email?.touched"
+        />
+        <div *ngIf="email?.invalid && email?.touched" class="invalid-feedback">
+          <span *ngIf="email?.errors?.['required']">Email is required</span>
+          <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Enter your password"
+          [class.is-invalid]="password?.invalid && password?.touched"
+        />
+        <div *ngIf="password?.invalid && password?.touched" class="invalid-feedback">
+          <span *ngIf="password?.errors?.['required']">Password is required</span>
+          <span *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters</span>
+        </div>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          class="form-control"
+          formControlName="confirmPassword"
+          placeholder="Confirm your password"
+          [class.is-invalid]="(confirmPassword?.invalid && confirmPassword?.touched) || passwordMismatch"
+        />
+        <div *ngIf="(confirmPassword?.invalid && confirmPassword?.touched) || passwordMismatch" class="invalid-feedback">
+          <span *ngIf="confirmPassword?.errors?.['required']">Confirm password is required</span>
+          <span *ngIf="passwordMismatch">Passwords do not match</span>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-primary btn-block"
+        [disabled]="signupForm.invalid || passwordMismatch"
+      >
+        Sign Up
+      </button>
+
+      <!-- Login Link -->
+      <div class="login-link">
+        Already have an account? <a routerLink="/login">Login here</a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 
@@ -10,21 +10,57 @@ import { LoginServiceService } from 'src/app/services/login-service.service';
 })
 export class SignupComponent {
 
-  constructor(private authService: LoginServiceService, private router: Router) { }
-
-  form: any = {
-    username: null,
-    email: null,
-    password: null
-  };
+  signupForm!: FormGroup;
 
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  passwordMismatch = false;
+
+  constructor(private authService: LoginServiceService, private router: Router) {
+    this.initializeForm();
+  }
+
+  initializeForm(): void {
+    this.signupForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      confirmPassword: new FormControl('', [Validators.required])
+    });
+  }
+
+  get name() {
+    return this.signupForm.get('name');
+  }
+
+  get email() {
+    return this.signupForm.get('email');
+  }
+
+  get password() {
+    return this.signupForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.signupForm.get('confirmPassword');
+  }
 
   onSubmit(): void {
-    const { username, email, password } = this.form;
-    this.authService.register(username, email, password).subscribe({
+    debugger
+    if (this.signupForm.invalid) {
+      return;
+    }
+
+    const { name, email, password, confirmPassword } = this.signupForm.value;
+
+    if (password !== confirmPassword) {
+      this.passwordMismatch = true;
+      return;
+    }
+
+    this.passwordMismatch = false;
+    this.authService.register(name, email, password).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;

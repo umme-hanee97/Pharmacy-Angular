@@ -9,7 +9,7 @@ export class CompServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private url = "http://localhost:8080/company";
+  private url = "https://pharmacy-spring.onrender.com/company";
 
   httpOptions = {
     headers: new HttpHeaders({

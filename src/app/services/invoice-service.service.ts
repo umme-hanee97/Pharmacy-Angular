@@ -9,7 +9,7 @@ export class InvoiceServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private url = "http://localhost:8080/invoice";
+  private url = "https://pharmacy-spring.onrender.com/invoice";
 
   httpOptions = {
     headers: new HttpHeaders({

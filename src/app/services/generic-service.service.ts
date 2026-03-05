@@ -9,7 +9,7 @@ export class GenericServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private url = "http://localhost:8080/generic";
+  private url = "https://pharmacy-spring.onrender.com/generic";
 
   httpOptions = {
     headers: new HttpHeaders({

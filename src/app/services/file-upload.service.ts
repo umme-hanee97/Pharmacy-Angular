@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FileUploadService {
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://pharmacy-spring.onrender.com/';
 
   constructor(private http: HttpClient) { }
 

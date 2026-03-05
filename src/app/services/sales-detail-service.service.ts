@@ -9,7 +9,7 @@ export class SalesDetailServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private url = "http://localhost:8080/saledet";
+  private url = "https://pharmacy-spring.onrender.com/saledet";
 
   httpOptions = {
     headers: new HttpHeaders({

@@ -9,7 +9,7 @@ export class ReturnShopServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private url = "http://localhost:8080/retpro";
+  private url = "https://pharmacy-spring.onrender.com/retpro";
 
   httpOptions = {
     headers: new HttpHeaders({

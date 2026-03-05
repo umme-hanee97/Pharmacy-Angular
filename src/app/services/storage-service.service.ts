@@ -8,6 +8,10 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class StorageServiceService {
+  clean() {
+    window.sessionStorage.clear();
+    window.location.reload();
+  }
 
   constructor(private router: Router) { }
 

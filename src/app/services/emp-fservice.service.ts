@@ -9,7 +9,7 @@ export class EmpFServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private url = "http://localhost:8080/empdet";
+  private url = "https://pharmacy-spring.onrender.com/empdet";
 
   httpOptions = {
     headers: new HttpHeaders({

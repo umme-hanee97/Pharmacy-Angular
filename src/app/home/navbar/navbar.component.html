@@ -26,17 +26,12 @@
   </ul>
 </nav> -->
 
-
-
-
-
-<section class="app">
+<section class="app" *ngIf="isLoggedIn">
   <aside class="sidebar">
          <header>
         <!-- Menu -->
       </header>
     <nav class="sidebar-nav">
- 
       <ul>
         <li>
           <a [routerLink]="['/dashboard']"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
@@ -151,6 +146,9 @@
         </li>
         <li>
           <a href="#"><i class="material-icons">account_circle</i> <span class="">Profile</span></a>
+        </li>
+        <li>
+          <a (click)="logout()" style="cursor: pointer;"><i class="material-icons">logout</i> <span class="">Logout</span></a>
         </li>
       </ul>
     </nav>

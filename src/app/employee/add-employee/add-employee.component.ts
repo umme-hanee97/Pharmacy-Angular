@@ -26,6 +26,7 @@ export class AddEmployeeComponent {
   }
 
   empForm: FormGroup = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl(''),
     education: new FormControl(''),
     experience: new FormControl(''),
@@ -43,7 +44,7 @@ export class AddEmployeeComponent {
 
   onsubmit() {
     console.log(this.empForm.value);
-    this.empForm.value.employeeDetail = this.empDetails.id;
+    // this.empForm.value.employeeDetail = this.empDetails.id;
     this.proApi.addData(this.empForm.value).subscribe((val: any) => {
       this.router.navigateByUrl('/emplist');
     })
